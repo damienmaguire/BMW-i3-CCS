@@ -1,0 +1,68 @@
+VERSION ""
+
+
+NS_ :
+    NS_DESC_
+    CM_
+    BA_DEF_
+    BA_
+    VAL_
+    CAT_DEF_
+    CAT_
+    FILTER
+    BA_DEF_DEF_
+    EV_DATA_
+    ENVVAR_DATA_
+    SGTYPE_
+    SGTYPE_VAL_
+    BA_DEF_SGTYPE_
+    BA_SGTYPE_
+    SIG_TYPE_REF_
+    VAL_TABLE_
+    SIG_GROUP_
+    SIG_VALTYPE_
+    SIGTYPE_VALTYPE_
+    BO_TX_BU_
+    BA_DEF_REL_
+    BA_REL_
+    BA_DEF_DEF_REL_
+    BU_SG_REL_
+    BU_EV_REL_
+    BU_BO_REL_
+    SG_MUL_VAL_
+
+BS_: 
+BU_: LIM 
+BO_ 670 LIMMsg29E: 0 LIM
+   SG_ I_Available : 24|16@1+ (0.1,0) [-500|500] "Amps" Vector__XXX
+   SG_ V_Avail : 8|16@1+ (0.1,0) [0|1000] "Volts" Vector__XXX
+
+BO_ 751 LIMMsg2EF: 0 LIM
+   SG_ MinV_Avail : 0|16@1+ (0.1,0) [0|1000] "Volts" Vector__XXX
+
+BO_ 690 LIMMsg2B2: 0 LIM
+   SG_ Battery_Compatability : 38|2@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CHG_Volts : 0|16@1+ (0.1,0) [0|1] "Volts" Vector__XXX
+   SG_ CHG_Amps : 16|16@1+ (0.1,0) [-500|500] "Amps" Vector__XXX
+
+BO_ 948 LIMMsg3B4: 0 LIM
+   SG_ Pilot_Current : 0|8@1+ (1,0) [0|63] "Amps" Vector__XXX
+   SG_ Cable_Current : 8|8@1+ (1,0) [0|63] "Amps" Vector__XXX
+
+BA_DEF_ BO_ "GenMsgBackgroundColor" STRING ;
+BA_DEF_ BO_ "GenMsgForegroundColor" STRING ;
+BA_DEF_ BO_ "matchingcriteria" INT 0 0;
+BA_DEF_ BO_ "filterlabeling" INT 0 0;
+BA_ "GenMsgBackgroundColor" BO_ 670 "#ffffff";
+BA_ "GenMsgForegroundColor" BO_ 670 "#000000";
+BA_ "GenMsgForegroundColor" BO_ 751 "#000000";
+BA_ "GenMsgBackgroundColor" BO_ 751 "#ffffff";
+BA_ "GenMsgForegroundColor" BO_ 690 "#000000";
+BA_ "GenMsgBackgroundColor" BO_ 690 "#ffffff";
+BA_ "GenMsgForegroundColor" BO_ 948 "#000000";
+BA_ "GenMsgBackgroundColor" BO_ 948 "#ffffff";
+BA_DEF_DEF_ "GenMsgBackgroundColor" "#ffffff";
+BA_DEF_DEF_ "GenMsgForegroundColor" "#000000";
+BA_DEF_DEF_ "matchingcriteria" 0;
+BA_DEF_DEF_ "filterlabeling" 1;
+VAL_ 690 Battery_Compatability 0 "Compatible" 1 "Incompatible" 3 "Signal_error";
