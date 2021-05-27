@@ -51,11 +51,14 @@ BO_ 948 LIMMsg3B4: 0 LIM
    SG_ FC_Voltage : 56|8@1+ (2,0) [0|500] "Volts" Vector__XXX
    SG_ Pilot_Status : 32|4@1+ (1,0) [0|1] "" Vector__XXX
    SG_ PP_Status : 16|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ CP_Lock_Status : 26|2@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CHG_Flap_Status : 24|2@1+ (1,0) [0|1] "" Vector__XXX
 
 BO_ 274 BMSMsg112: 0 BMS
    SG_ Battery_Volts : 16|16@1+ (0.1,0) [0|500] "Volts" Vector__XXX
    SG_ zwischenkreis : 56|8@1+ (4,0) [0|1000] "Volts" Vector__XXX
    SG_ Battery_Status : 48|4@1+ (1,0) [0|16] "" Vector__XXX
+   SG_ Battery_Current : 0|16@1+ (0.1,-819.2) [0|819] "Amps" Vector__XXX
 
 BO_ 1001 UnknownMsg3E9: 0 Unknown
    SG_ FC_Current_Command : 40|10@1- (1,0) [-500|500] "Amps" Vector__XXX
@@ -84,6 +87,8 @@ BO_ 2147484721 UnknownMsg431: 0 Unknown
 
 BA_DEF_ BO_ "GenMsgBackgroundColor" STRING ;
 BA_DEF_ BO_ "GenMsgForegroundColor" STRING ;
+BA_DEF_ BO_ "matchingcriteria" INT 0 0;
+BA_DEF_ BO_ "filterlabeling" INT 0 0;
 BA_DEF_ BO_ "matchingcriteria" INT 0 0;
 BA_DEF_ BO_ "filterlabeling" INT 0 0;
 BA_DEF_ BO_ "matchingcriteria" INT 0 0;
