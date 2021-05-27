@@ -35,8 +35,11 @@ Metro timer_Frames100 = Metro(100);
 
 bool CHGState=false;
 bool CHGreq=false;
+bool PP=false;
+bool Auto=false;
 byte ACcur=0;
 byte CABlim=0;
+byte Pilot=0;
 
 CAN_FRAME outFrame;  //A structured variable according to due_can library for transmitting CAN data.
 CAN_FRAME inFrame;    //structure to keep inbound inFrames
@@ -241,8 +244,10 @@ void checkCAN()
     Can0.read(inFrame);
   if(inFrame.id == 0x3B4)
   {
-  ACcur = (inFrame.data.bytes[0]);
-  CABlim = (inFrame.data.bytes[1]);
+  ACcur = inFrame.data.bytes[0];
+  CABlim = inFrame.data.bytes[1];
+  PP = (inFrame.data.bytes[2]&0x1);
+  Pilot = (inFrame.data.bytes[4]&0xF);
   }
   
 }
@@ -265,6 +270,7 @@ void handle_Wifi(){
         outFrame.data.bytes[7]=0xff;  
         Can0.sendFrame(outFrame); 
 
+if((Auto)&&(PP)) CHGreq=true;
 
   
 /*
@@ -298,7 +304,17 @@ SerialDEBUG.println("Amps");
 SerialDEBUG.print("Cable Limit=");
 SerialDEBUG.print(CABlim);
 SerialDEBUG.println("Amps");
-SerialDEBUG.println("Commands : 'c' engage charge. 'd' disengage charge.");
+if(PP) SerialDEBUG.println("Plug Inserted");
+if(!PP) SerialDEBUG.println("Unplugged");
+SerialDEBUG.print("CP Status=");
+if(Pilot==0x8) SerialDEBUG.println("None");
+if(Pilot==0x9) SerialDEBUG.println("STD AC");
+if(Pilot==0xA) SerialDEBUG.println("AC Charging");
+if(Pilot==0xC) SerialDEBUG.println("5% DC");
+if(Pilot==0xD) SerialDEBUG.println("CCS Comms");
+if(Auto) SerialDEBUG.println("Auto Chg Active");
+if(!Auto) SerialDEBUG.println("Auto Chg Deactivated");
+SerialDEBUG.println("Commands : 'c' engage charge. 'd' disengage charge. 'a' toggle auto charge");
 
 SerialDEBUG.println("//////////////////////////////////////////////////////////////////////////////////////////");
 }
@@ -316,8 +332,12 @@ void checkforinput(){
   
           case 'd':    
             CHGreq=false;
+            Auto=false;
             break;
 
+          case 'a':    
+            Auto=!Auto;
+            break;
 
       }
 }
