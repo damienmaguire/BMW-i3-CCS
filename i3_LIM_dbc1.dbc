@@ -50,6 +50,7 @@ BO_ 948 LIMMsg3B4: 0 LIM
    SG_ Cable_Current : 8|8@1+ (1,0) [0|63] "Amps" Vector__XXX
    SG_ FC_Voltage : 56|8@1+ (2,0) [0|500] "Volts" Vector__XXX
    SG_ Pilot_Status : 32|4@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ PP_Status : 16|1@0+ (1,0) [0|1] "" Vector__XXX
 
 BO_ 274 BMSMsg112: 0 BMS
    SG_ Battery_Volts : 16|16@1+ (0.1,0) [0|500] "Volts" Vector__XXX
@@ -78,7 +79,7 @@ BO_ 753 UnknownMsg2F1: 0 Unknown
    SG_ CHG_I_Lim : 14|10@1- (1,0) [-500|500] "Amps" Vector__XXX
    SG_ CHG_V_Lim : 0|14@1- (0.1,0) [0|1000] "Volts" Vector__XXX
 
-BO_ 1073 UnknownMsg431: 0 Unknown
+BO_ 2147484721 UnknownMsg431: 0 Unknown
    SG_ Serv_Dis_Status : 0|2@1+ (1,0) [0|1] "" Vector__XXX
 
 BA_DEF_ BO_ "GenMsgBackgroundColor" STRING ;
@@ -105,8 +106,8 @@ BA_ "GenMsgForegroundColor" BO_ 762 "#000000";
 BA_ "GenMsgBackgroundColor" BO_ 762 "#ffffff";
 BA_ "GenMsgForegroundColor" BO_ 753 "#000000";
 BA_ "GenMsgBackgroundColor" BO_ 753 "#ffffff";
-BA_ "GenMsgForegroundColor" BO_ 1073 "#000000";
-BA_ "GenMsgBackgroundColor" BO_ 1073 "#ffffff";
+BA_ "GenMsgForegroundColor" BO_ 2147484721 "#000000";
+BA_ "GenMsgBackgroundColor" BO_ 2147484721 "#ffffff";
 BA_DEF_DEF_ "GenMsgBackgroundColor" "#ffffff";
 BA_DEF_DEF_ "GenMsgForegroundColor" "#000000";
 BA_DEF_DEF_ "matchingcriteria" 0;
@@ -117,4 +118,5 @@ CM_ BU_ Unknown "Lim Command";
 VAL_ 690 Battery_Compatability 0 "Compatible" 1 "Incompatible" 3 "Signal_error";
 VAL_ 948 FC_Voltage 251 "AC_Charge" 254 "Error" 252 "Not_Available";
 VAL_ 948 Pilot_Status 8 "No_Pilot" 9 "AC_Std_Pilot" 10 "AC_Charging" 12 "5%_DC_Pilot" 13 "CCS_Comms";
+VAL_ 948 PP_Status 0 "Unplugged" 1 "Plug_Inserted";
 VAL_ 274 Battery_Status 5 "Normal";
