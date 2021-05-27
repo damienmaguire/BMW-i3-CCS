@@ -53,12 +53,38 @@ BO_ 948 LIMMsg3B4: 0 LIM
 
 BO_ 274 BMSMsg112: 0 BMS
    SG_ Battery_Volts : 16|16@1+ (0.1,0) [0|500] "Volts" Vector__XXX
+   SG_ zwischenkreis : 56|8@1+ (4,0) [0|1000] "Volts" Vector__XXX
+   SG_ Battery_Status : 48|4@1+ (1,0) [0|16] "" Vector__XXX
 
 BO_ 1001 UnknownMsg3E9: 0 Unknown
-   SG_ FC_Current_Command : 40|8@1+ (1,0) [0|500] "Amps" Vector__XXX
+   SG_ FC_Current_Command : 40|10@1- (1,0) [-500|500] "Amps" Vector__XXX
+   SG_ Contactor_Con : 52|4@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ EndOfChg_Time : 56|8@1+ (1,0) [0|255] "Mins" Vector__XXX
+   SG_ Chg_Status : 20|4@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Chg_Readiness : 24|2@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ DCFC_I_Diff : 26|2@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ DCFC_V_Diff : 50|2@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 762 UnknownMsg2FA: 0 Unknown
+   SG_ Chg_End : 18|2@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ FC_End : 16|2@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Target_CHG_Ph : 20|4@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Target_Volt_CHG : 24|14@1+ (0.1,0) [0|1000] "Volts" Vector__XXX
+
+BO_ 753 UnknownMsg2F1: 0 Unknown
+   SG_ Time_to_FC_SOC : 40|16@1+ (10,0) [0|655320] "Secs" Vector__XXX
+   SG_ Time_to_SOC : 24|16@1+ (10,0) [0|655320] "Secs" Vector__XXX
+   SG_ FC_SOC : 56|8@1+ (0.5,0) [0|100] "%" Vector__XXX
+   SG_ CHG_I_Lim : 14|10@1- (1,0) [-500|500] "Amps" Vector__XXX
+   SG_ CHG_V_Lim : 0|14@1- (0.1,0) [0|1000] "Volts" Vector__XXX
+
+BO_ 1073 UnknownMsg431: 0 Unknown
+   SG_ Serv_Dis_Status : 0|2@1+ (1,0) [0|1] "" Vector__XXX
 
 BA_DEF_ BO_ "GenMsgBackgroundColor" STRING ;
 BA_DEF_ BO_ "GenMsgForegroundColor" STRING ;
+BA_DEF_ BO_ "matchingcriteria" INT 0 0;
+BA_DEF_ BO_ "filterlabeling" INT 0 0;
 BA_DEF_ BO_ "matchingcriteria" INT 0 0;
 BA_DEF_ BO_ "filterlabeling" INT 0 0;
 BA_DEF_ BO_ "matchingcriteria" INT 0 0;
@@ -75,13 +101,20 @@ BA_ "GenMsgForegroundColor" BO_ 274 "#000000";
 BA_ "GenMsgBackgroundColor" BO_ 274 "#ffffff";
 BA_ "GenMsgForegroundColor" BO_ 1001 "#000000";
 BA_ "GenMsgBackgroundColor" BO_ 1001 "#ffffff";
+BA_ "GenMsgForegroundColor" BO_ 762 "#000000";
+BA_ "GenMsgBackgroundColor" BO_ 762 "#ffffff";
+BA_ "GenMsgForegroundColor" BO_ 753 "#000000";
+BA_ "GenMsgBackgroundColor" BO_ 753 "#ffffff";
+BA_ "GenMsgForegroundColor" BO_ 1073 "#000000";
+BA_ "GenMsgBackgroundColor" BO_ 1073 "#ffffff";
 BA_DEF_DEF_ "GenMsgBackgroundColor" "#ffffff";
 BA_DEF_DEF_ "GenMsgForegroundColor" "#000000";
 BA_DEF_DEF_ "matchingcriteria" 0;
-BA_DEF_DEF_ "filterlabeling" 1;
+BA_DEF_DEF_ "filterlabeling" 0;
 BA_DEF_DEF_ "matchingcriteria" 0;
 BA_DEF_DEF_ "filterlabeling" true;
 CM_ BU_ Unknown "Lim Command";
 VAL_ 690 Battery_Compatability 0 "Compatible" 1 "Incompatible" 3 "Signal_error";
 VAL_ 948 FC_Voltage 251 "AC_Charge" 254 "Error" 252 "Not_Available";
 VAL_ 948 Pilot_Status 8 "No_Pilot" 9 "AC_Std_Pilot" 10 "AC_Charging" 12 "5%_DC_Pilot" 13 "CCS_Comms";
+VAL_ 274 Battery_Status 5 "Normal";
