@@ -190,7 +190,7 @@ void Msgs100ms()                       //100ms messages here
 
 void Msgs200ms()                      ////200ms messages here
 {
-
+        
         outFrame.id = 0x3E9;       
         outFrame.length = 8;            
         outFrame.extended = 0;          
@@ -198,8 +198,8 @@ void Msgs200ms()                      ////200ms messages here
         outFrame.data.bytes[0]=lowByte(Batt_Wh);  
         outFrame.data.bytes[1]=highByte(Batt_Wh); 
         outFrame.data.bytes[2]=((CHG_Status<<4)|(CHG_Req));  //charge status in bits 4-7.goes to 1 then 2.8 secs later to 2. Plug locking???. Charge request in lower nibble. 1 when charging. 0 when not charging.
-        outFrame.data.bytes[3]=((lowByte(CHG_Pwr)<<4)||CHG_Ready); //charge readiness in bits 0 and 1. 1 = ready to charge.upper nibble is LSB of charge power.
-        outFrame.data.bytes[4]=highByte(CHG_Pwr);  //MSB of charge power.in this case 0x28 = 40x25 = 1000W. Probably net DC power into the Batt.
+        outFrame.data.bytes[3]=((lowByte(CHG_Pwr)<<4)|CHG_Ready); //charge readiness in bits 0 and 1. 1 = ready to charge.upper nibble is LSB of charge power.
+        outFrame.data.bytes[4]=lowByte(CHG_Pwr)>>4;  //MSB of charge power.in this case 0x28 = 40x25 = 1000W. Probably net DC power into the Batt.
         outFrame.data.bytes[5]=0x00;  //LSB of the DC ccs current command
         outFrame.data.bytes[6]=0x00;  //bits 0 and 1 MSB of the DC ccs current command.Upper nibble is DC ccs contactor control. Observed in DC fc logs only.
                                       //transitions from 0 to 2 and start of charge but 2 to 1 to 0 at end. Status and Ready operate the same as in AC logs.
