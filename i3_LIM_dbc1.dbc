@@ -53,12 +53,16 @@ BO_ 948 LIMMsg3B4: 0 LIM
    SG_ PP_Status : 16|1@0+ (1,0) [0|1] "" Vector__XXX
    SG_ CP_Lock_Status : 26|2@1+ (1,0) [0|1] "" Vector__XXX
    SG_ CHG_Flap_Status : 24|2@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Plug_Connection : 37|2@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Charge_End_Sig : 20|2@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ HW_Charger_EN : 22|2@1+ (1,0) [0|1] "" Vector__XXX
 
 BO_ 274 BMSMsg112: 0 BMS
    SG_ Battery_Volts : 16|16@1+ (0.1,0) [0|500] "Volts" Vector__XXX
    SG_ zwischenkreis : 56|8@1+ (4,0) [0|1000] "Volts" Vector__XXX
    SG_ Battery_Status : 48|4@1+ (1,0) [0|16] "" Vector__XXX
    SG_ Battery_Current : 0|16@1+ (0.1,-819.2) [0|819] "Amps" Vector__XXX
+   SG_ HVBatt_SOC : 32|12@1+ (0.1,0) [0|100] "%" Vector__XXX
 
 BO_ 1001 UnknownMsg3E9: 0 Unknown
    SG_ FC_Current_Command : 40|10@1- (1,0) [-500|500] "Amps" Vector__XXX
@@ -69,14 +73,14 @@ BO_ 1001 UnknownMsg3E9: 0 Unknown
    SG_ DCFC_I_Diff : 26|2@1+ (1,0) [0|1] "" Vector__XXX
    SG_ DCFC_V_Diff : 50|2@1+ (1,0) [0|1] "" Vector__XXX
    SG_ Batt_Energy : 0|16@1+ (1,0) [0|65534] "Wh" Vector__XXX
-   SG_ Power? : 28|12@1+ (25,0) [0|102350] "Watts" Vector__XXX
    SG_ Charge_Req : 16|4@1+ (1,0) [0|16] "" Vector__XXX
+   SG_ Charging_Pwr : 28|12@1+ (25,0) [0|102350] "Watts" Vector__XXX
 
 BO_ 762 UnknownMsg2FA: 0 Unknown
    SG_ Chg_End : 18|2@1+ (1,0) [0|1] "" Vector__XXX
-   SG_ FC_End : 16|2@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ FC_End : 16|2@1+ (1,0) [0|1] "" LIM
    SG_ Target_CHG_Ph : 20|4@1+ (1,0) [0|1] "" Vector__XXX
-   SG_ Target_Volt_CHG : 24|14@1+ (0.1,0) [0|1000] "Volts" Vector__XXX
+   SG_ Time2Go : 0|16@1+ (1,0) [0|65534] "Mins" Vector__XXX
 
 BO_ 753 UnknownMsg2F1: 0 Unknown
    SG_ Time_to_FC_SOC : 40|16@1+ (10,0) [0|655320] "Secs" Vector__XXX
@@ -93,8 +97,18 @@ BO_ 1074 UnknownMsg432: 0 Unknown
    SG_ Voltage_Setpoint : 4|12@1+ (0.1,0) [0|410] "Volts" Vector__XXX
    SG_ Displayed_SOC : 32|8@1+ (0.5,0) [0|100] "%" Vector__XXX
 
+BO_ 626 LIMMsg272: 0 LIM
+   SG_ FC_Contactor_State : 18|6@1+ (1,0) [0|24] "" Vector__XXX
+   SG_ ChargeFlap_Status : 16|2@1+ (1,0) [0|4] "" Vector__XXX
+
 BA_DEF_ BO_ "GenMsgBackgroundColor" STRING ;
 BA_DEF_ BO_ "GenMsgForegroundColor" STRING ;
+BA_DEF_ BO_ "matchingcriteria" INT 0 0;
+BA_DEF_ BO_ "filterlabeling" INT 0 0;
+BA_DEF_ BO_ "matchingcriteria" INT 0 0;
+BA_DEF_ BO_ "filterlabeling" INT 0 0;
+BA_DEF_ BO_ "matchingcriteria" INT 0 0;
+BA_DEF_ BO_ "filterlabeling" INT 0 0;
 BA_DEF_ BO_ "matchingcriteria" INT 0 0;
 BA_DEF_ BO_ "filterlabeling" INT 0 0;
 BA_DEF_ BO_ "matchingcriteria" INT 0 0;
@@ -125,6 +139,8 @@ BA_ "GenMsgForegroundColor" BO_ 1073 "#000000";
 BA_ "GenMsgBackgroundColor" BO_ 1073 "#ffffff";
 BA_ "GenMsgForegroundColor" BO_ 1074 "#000000";
 BA_ "GenMsgBackgroundColor" BO_ 1074 "#ffffff";
+BA_ "GenMsgForegroundColor" BO_ 626 "#000000";
+BA_ "GenMsgBackgroundColor" BO_ 626 "#ffffff";
 BA_DEF_DEF_ "GenMsgBackgroundColor" "#ffffff";
 BA_DEF_DEF_ "GenMsgForegroundColor" "#000000";
 BA_DEF_DEF_ "matchingcriteria" 0;
