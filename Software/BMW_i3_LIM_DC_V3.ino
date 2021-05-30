@@ -206,23 +206,25 @@ void Msgs100ms()                       //100ms messages here
         outFrame.length = 8;            
         outFrame.extended = 0;          
         outFrame.rtr=1;                 
-        outFrame.data.bytes[0]=0xA2;  
-        outFrame.data.bytes[1]=0x0f; 
-        outFrame.data.bytes[2]=0x00;  
-        outFrame.data.bytes[3]=0x18; 
-        outFrame.data.bytes[4]=0x1B;
-        outFrame.data.bytes[5]=0xFB;
-        outFrame.data.bytes[6]=0x06;
-        outFrame.data.bytes[7]=0xA0;  
+        outFrame.data.bytes[0]=0xA2;  //Charge voltage limit LSB. 14 bit signed int.scale 0.1 0xfa2=4002*.1=400.2Volts
+        outFrame.data.bytes[1]=0x0f;  //Charge voltage limit MSB. 14 bit signed int.scale 0.1
+        outFrame.data.bytes[2]=0x00;  //Fast charge current limit. Not used in logs from 2014-15 vehicle so far. 8 bit unsigned int. scale 1.so max 254amps in theory...
+        outFrame.data.bytes[3]=0x18;  //time remaining in seconds to hit soc target from byte 7 in AC mode. LSB. 16 bit unsigned int. scale 10.
+        outFrame.data.bytes[4]=0x1B;  //time remaining in seconds to hit soc target from byte 7 in AC mode. MSB. 16 bit unsigned int. scale 10.
+        outFrame.data.bytes[5]=0xFB;  //time remaining in seconds to hit soc target from byte 7 in ccs mode. LSB. 16 bit unsigned int. scale 10.
+        outFrame.data.bytes[6]=0x06;  //time remaining in seconds to hit soc target from byte 7 in ccs mode. MSB. 16 bit unsigned int. scale 10.
+        outFrame.data.bytes[7]=0xA0;  //Fast charge SOC target. 8 bit unsigned int. scale 0.5. 0xA0=160*0.5=80%
         Can0.sendFrame(outFrame); 
 
         outFrame.id = 0x2fa;       //Lim command 3. Used in DC mode
         outFrame.length = 8;            
         outFrame.extended = 0;          
         outFrame.rtr=1;                 
-        outFrame.data.bytes[0]=0x84;  
-        outFrame.data.bytes[1]=0x04; 
-        outFrame.data.bytes[2]=0x00;  
+        outFrame.data.bytes[0]=0x84; //Time to go in minutes LSB. 16 bit unsigned int. scale 1. May be used for the ccs station display of charge remaining time... 
+        outFrame.data.bytes[1]=0x04; //Time to go in minutes MSB. 16 bit unsigned int. scale 1. May be used for the ccs station display of charge remaining time... 
+        outFrame.data.bytes[2]=0x00;  //upper nibble seems to be a mode command to the ccs station. 0 when off, 9 when in constant current phase of cycle.
+                                      //more investigation needed here...
+                                      //Lower nibble seems to be intended for two end charge commands each of 2 bits.
         outFrame.data.bytes[3]=0xff; 
         outFrame.data.bytes[4]=0xff;
         outFrame.data.bytes[5]=0xff;
@@ -237,7 +239,7 @@ void Msgs100ms()                       //100ms messages here
 void Msgs200ms()                      ////200ms messages here
 {
         
-        outFrame.id = 0x3E9;   //Mains LIM control message    
+        outFrame.id = 0x3E9;   //Main LIM control message    
         outFrame.length = 8;            
         outFrame.extended = 0;          
         outFrame.rtr=1;                 
