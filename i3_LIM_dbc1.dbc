@@ -100,9 +100,14 @@ BO_ 1074 UnknownMsg432: 0 Unknown
 BO_ 626 LIMMsg272: 0 LIM
    SG_ FC_Contactor_State : 18|6@1+ (1,0) [0|24] "" Vector__XXX
    SG_ ChargeFlap_Status : 16|2@1+ (1,0) [0|4] "" Vector__XXX
+   SG_ FC_Contactor_Test : 19|1@0+ (1,0) [0|1] "" Vector__XXX
 
 BA_DEF_ BO_ "GenMsgBackgroundColor" STRING ;
 BA_DEF_ BO_ "GenMsgForegroundColor" STRING ;
+BA_DEF_ BO_ "matchingcriteria" INT 0 0;
+BA_DEF_ BO_ "filterlabeling" INT 0 0;
+BA_DEF_ BO_ "matchingcriteria" INT 0 0;
+BA_DEF_ BO_ "filterlabeling" INT 0 0;
 BA_DEF_ BO_ "matchingcriteria" INT 0 0;
 BA_DEF_ BO_ "filterlabeling" INT 0 0;
 BA_DEF_ BO_ "matchingcriteria" INT 0 0;
@@ -153,3 +158,5 @@ VAL_ 948 FC_Voltage 251 "AC_Charge" 254 "Error" 252 "Not_Available";
 VAL_ 948 Pilot_Status 8 "No_Pilot" 9 "AC_Std_Pilot" 10 "AC_Charging" 12 "5%_DC_Pilot" 13 "CCS_Comms";
 VAL_ 948 PP_Status 0 "Unplugged" 1 "Plug_Inserted";
 VAL_ 274 Battery_Status 5 "Normal";
+VAL_ 762 Target_CHG_Ph 0 "Standby" 1 "Initialisation" 2 "Subpoena" 3 "Energy_Transfer" 4 "Turn_Off" 15 "Reserved" 14 "Reserved" 0 "No Description";
+VAL_ 626 FC_Contactor_Test 0 "Fail" 1 "Pass";
