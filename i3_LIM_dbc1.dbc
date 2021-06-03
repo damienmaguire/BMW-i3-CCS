@@ -49,7 +49,7 @@ BO_ 948 LIMMsg3B4: 0 LIM
    SG_ Pilot_Current : 0|8@1+ (1,0) [0|63] "Amps" Vector__XXX
    SG_ Cable_Current : 8|8@1+ (1,0) [0|63] "Amps" Vector__XXX
    SG_ FC_Voltage : 56|8@1+ (2,0) [0|500] "Volts" Vector__XXX
-   SG_ Pilot_Status : 32|4@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Pilot_Status : 32|3@1+ (1,0) [0|1] "" Vector__XXX
    SG_ PP_Status : 16|1@0+ (1,0) [0|1] "" Vector__XXX
    SG_ CP_Lock_Status : 26|2@1+ (1,0) [0|1] "" Vector__XXX
    SG_ CHG_Flap_Status : 24|2@1+ (1,0) [0|1] "" Vector__XXX
@@ -124,6 +124,8 @@ BA_DEF_ BO_ "matchingcriteria" INT 0 0;
 BA_DEF_ BO_ "filterlabeling" INT 0 0;
 BA_DEF_ BO_ "matchingcriteria" INT 0 0;
 BA_DEF_ BO_ "filterlabeling" INT 0 0;
+BA_DEF_ BO_ "matchingcriteria" INT 0 0;
+BA_DEF_ BO_ "filterlabeling" INT 0 0;
 BA_ "GenMsgBackgroundColor" BO_ 670 "#ffffff";
 BA_ "GenMsgForegroundColor" BO_ 670 "#000000";
 BA_ "GenMsgForegroundColor" BO_ 751 "#000000";
@@ -155,7 +157,7 @@ BA_DEF_DEF_ "filterlabeling" true;
 CM_ BU_ Unknown "Lim Command";
 VAL_ 690 Battery_Compatability 0 "Compatible" 1 "Incompatible" 3 "Signal_error";
 VAL_ 948 FC_Voltage 251 "AC_Charge" 254 "Error" 252 "Not_Available";
-VAL_ 948 Pilot_Status 8 "No_Pilot" 9 "AC_Std_Pilot" 10 "AC_Charging" 12 "5%_DC_Pilot" 13 "CCS_Comms";
+VAL_ 948 Pilot_Status 0 "No_Pilot" 1 "AC_Not_Ready" 2 "AC_Ready" 3 "Error" 4 "5%_Not_Ready" 5 "5%_Ready" 6 "Pilot_Static";
 VAL_ 948 PP_Status 0 "Unplugged" 1 "Plug_Inserted";
 VAL_ 274 Battery_Status 5 "Normal";
 VAL_ 762 Target_CHG_Ph 0 "Standby" 1 "Initialisation" 2 "Subpoena" 3 "Energy_Transfer" 4 "Turn_Off" 15 "Reserved" 14 "Reserved" 0 "No Description";
