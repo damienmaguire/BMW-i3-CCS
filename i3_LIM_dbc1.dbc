@@ -36,12 +36,18 @@ BU_: LIM BMS Unknown
 BO_ 670 LIMMsg29E: 0 LIM
    SG_ I_Available : 24|16@1+ (0.1,0) [-500|500] "Amps" Vector__XXX
    SG_ V_Avail : 8|16@1+ (0.1,0) [0|1000] "Volts" Vector__XXX
+   SG_ Thresh_V : 40|16@1+ (0.1,0) [0|600] "V" Vector__XXX
+   SG_ Weld_Det_En : 0|2@1+ (1,0) [0|4] "" Vector__XXX
+   SG_ Power? : 56|8@1+ (1,0) [0|1] "252" Vector__XXX
+   SG_ internal_charger_status : 2|4@1+ (1,0) [0|16] "" Vector__XXX
 
 BO_ 751 LIMMsg2EF: 0 LIM
    SG_ MinV_Avail : 0|16@1+ (0.1,0) [0|1000] "Volts" Vector__XXX
+   SG_ Min_I_Avail : 16|12@1+ (0.1,0) [0|410] "A" Vector__XXX
+   SG_ Energy_Transmitted : 56|8@1+ (0.25,0) [0|63] "kWh" Vector__XXX
 
 BO_ 690 LIMMsg2B2: 0 LIM
-   SG_ Battery_Compatability : 38|2@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Battery_Compatability : 38|2@1+ (1,0) [0|4] "" Vector__XXX
    SG_ CHG_Volts : 0|16@1+ (0.1,0) [0|1] "Volts" Vector__XXX
    SG_ CHG_Amps : 16|16@1+ (0.1,0) [-500|500] "Amps" Vector__XXX
 
@@ -52,10 +58,13 @@ BO_ 948 LIMMsg3B4: 0 LIM
    SG_ Pilot_Status : 32|3@1+ (1,0) [0|1] "" Vector__XXX
    SG_ PP_Status : 16|1@0+ (1,0) [0|1] "" Vector__XXX
    SG_ CP_Lock_Status : 26|2@1+ (1,0) [0|1] "" Vector__XXX
-   SG_ CHG_Flap_Status : 24|2@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CHG_Flap_Status : 24|2@1+ (1,0) [0|4] "" Vector__XXX
    SG_ Plug_Connection : 37|2@1+ (1,0) [0|1] "" Vector__XXX
    SG_ Charge_End_Sig : 20|2@1+ (1,0) [0|1] "" Vector__XXX
    SG_ HW_Charger_EN : 22|2@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CCS_Plug : 35|2@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Charging_Type : 48|8@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ DC_Chg_Volts : 39|9@1+ (2,0) [0|1000] "V" Vector__XXX
 
 BO_ 274 BMSMsg112: 0 BMS
    SG_ Battery_Volts : 16|16@1+ (0.1,0) [0|500] "Volts" Vector__XXX
@@ -78,9 +87,10 @@ BO_ 1001 UnknownMsg3E9: 0 Unknown
 
 BO_ 762 UnknownMsg2FA: 0 Unknown
    SG_ Chg_End : 18|2@1+ (1,0) [0|1] "" Vector__XXX
-   SG_ FC_End : 16|2@1+ (1,0) [0|1] "" LIM
+   SG_ FC_End : 16|2@1+ (1,0) [0|1] "" Vector__XXX
    SG_ Target_CHG_Ph : 20|4@1+ (1,0) [0|1] "" Vector__XXX
    SG_ Time2Go : 0|16@1+ (1,0) [0|65534] "Mins" Vector__XXX
+   SG_ Target_Volts : 24|14@1+ (0.1,0) [0|1000] "V" LIM
 
 BO_ 753 UnknownMsg2F1: 0 Unknown
    SG_ Time_to_FC_SOC : 40|16@1+ (10,0) [0|655320] "Secs" Vector__XXX
@@ -96,14 +106,43 @@ BO_ 1073 UnknownMsg431: 0 Unknown
 BO_ 1074 UnknownMsg432: 0 Unknown
    SG_ Voltage_Setpoint : 4|12@1+ (0.1,0) [0|410] "Volts" Vector__XXX
    SG_ Displayed_SOC : 32|8@1+ (0.5,0) [0|100] "%" Vector__XXX
+   SG_ CV_Setpoint : 4|12@1+ (0.1,0) [0|409.4] "Volts" LIM
+   SG_ Low_SOC : 16|8@1+ (0.5,0) [0|100] "%" LIM
+   SG_ High_SOC : 24|8@1+ (0.5,0) [0|100] "%" LIM
+   SG_ Display_SOC : 32|8@1+ (0.5,0) [0|100] "%" LIM
 
 BO_ 626 LIMMsg272: 0 LIM
    SG_ FC_Contactor_State : 18|6@1+ (1,0) [0|24] "" Vector__XXX
    SG_ ChargeFlap_Status : 16|2@1+ (1,0) [0|4] "" Vector__XXX
    SG_ FC_Contactor_Test : 19|1@0+ (1,0) [0|1] "" Vector__XXX
 
+BO_ 1074 BMSMsg99: 0 BMS
+
+BO_ 808 UnknownMsg39: 0 Unknown
+   SG_ Seconds_ctr : 0|32@1+ (1,0) [0|4.29497e+09] "S" LIM
+   SG_ Day_ctr : 32|16@1+ (1,0) [0|65534] "Days" Vector__XXX
+
+BO_ 303 UnknownMsg12f: 0 Unknown
+   SG_ ST_KL : 16|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 1000 UnknownMsg3e8: 0 Unknown
+   SG_ RQ_Diag : 2|2@1+ (1,0) [0|4] "" LIM
+
+BO_ 764 UnknownMsg2fc: 0 Unknown
+   SG_ lock_button : 22|2@1+ (1,0) [0|4] "" LIM
+
 BA_DEF_ BO_ "GenMsgBackgroundColor" STRING ;
 BA_DEF_ BO_ "GenMsgForegroundColor" STRING ;
+BA_DEF_ BO_ "matchingcriteria" INT 0 0;
+BA_DEF_ BO_ "filterlabeling" INT 0 0;
+BA_DEF_ BO_ "matchingcriteria" INT 0 0;
+BA_DEF_ BO_ "filterlabeling" INT 0 0;
+BA_DEF_ BO_ "matchingcriteria" INT 0 0;
+BA_DEF_ BO_ "filterlabeling" INT 0 0;
+BA_DEF_ BO_ "matchingcriteria" INT 0 0;
+BA_DEF_ BO_ "filterlabeling" INT 0 0;
+BA_DEF_ BO_ "matchingcriteria" INT 0 0;
+BA_DEF_ BO_ "filterlabeling" INT 0 0;
 BA_DEF_ BO_ "matchingcriteria" INT 0 0;
 BA_DEF_ BO_ "filterlabeling" INT 0 0;
 BA_DEF_ BO_ "matchingcriteria" INT 0 0;
@@ -148,6 +187,14 @@ BA_ "GenMsgForegroundColor" BO_ 1074 "#000000";
 BA_ "GenMsgBackgroundColor" BO_ 1074 "#ffffff";
 BA_ "GenMsgForegroundColor" BO_ 626 "#000000";
 BA_ "GenMsgBackgroundColor" BO_ 626 "#ffffff";
+BA_ "GenMsgForegroundColor" BO_ 808 "#000000";
+BA_ "GenMsgBackgroundColor" BO_ 808 "#ffffff";
+BA_ "GenMsgForegroundColor" BO_ 303 "#000000";
+BA_ "GenMsgBackgroundColor" BO_ 303 "#ffffff";
+BA_ "GenMsgForegroundColor" BO_ 1000 "#000000";
+BA_ "GenMsgBackgroundColor" BO_ 1000 "#ffffff";
+BA_ "GenMsgForegroundColor" BO_ 764 "#000000";
+BA_ "GenMsgBackgroundColor" BO_ 764 "#ffffff";
 BA_DEF_DEF_ "GenMsgBackgroundColor" "#ffffff";
 BA_DEF_DEF_ "GenMsgForegroundColor" "#000000";
 BA_DEF_DEF_ "matchingcriteria" 0;
@@ -155,10 +202,23 @@ BA_DEF_DEF_ "filterlabeling" 0;
 BA_DEF_DEF_ "matchingcriteria" 0;
 BA_DEF_DEF_ "filterlabeling" true;
 CM_ BU_ Unknown "Lim Command";
+VAL_ 670 Weld_Det_En 0 "Charger_does_not_support_the_EV" 1 "Charger_supports_the_EV_relay_weld" 3 "Signal_unavail";
+VAL_ 670 internal_charger_status 0 "Not_ready" 1 "Ready" 2 "Switch_off_charger" 3 "Interruption" 4 "Pre_charge" 5 "insulation_monitor" 6 "estop" 7 "Malfunction" 19 "reserved" 20 "reserved" 21 "signal_invalid";
 VAL_ 690 Battery_Compatability 0 "Compatible" 1 "Incompatible" 3 "Signal_error";
 VAL_ 948 FC_Voltage 251 "AC_Charge" 254 "Error" 252 "Not_Available";
 VAL_ 948 Pilot_Status 0 "No_Pilot" 1 "AC_Not_Ready" 2 "AC_Ready" 3 "Error" 4 "5%_Not_Ready" 5 "5%_Ready" 6 "Pilot_Static";
 VAL_ 948 PP_Status 0 "Unplugged" 1 "Plug_Inserted";
+VAL_ 948 CP_Lock_Status 0 "Not_Locked" 1 "Locked" 2 "Error" 3 "Invalid_signal";
+VAL_ 948 CHG_Flap_Status 0 "not_locked" 1 "locked" 3 "invalid";
+VAL_ 948 Plug_Connection 0 "None" 1 "Plugged" 2 "Error" 3 "Invalid_Signal";
+VAL_ 948 CCS_Plug 0 "Not_Inserted" 1 "Inserted" 2 "Error" 3 "Invalid_Signal";
+VAL_ 948 Charging_Type 0 "Noen" 1 "AC_Type_1" 2 "AC_Type_2" 3 "DC_Chademo" 4 "DC_CCS_Type_1C" 5 "AC_China" 6 "AC_CCS_Type_1" 7 "AC_CCS_Type_2" 8 "DC_CCS_Type_1" 9 "DC_CCS_Type_2C";
+VAL_ 948 DC_Chg_Volts 507 "AC_or_Neg" 508 "Inactive" 509 "Not_avail" 510 "Error" 511 "Invalid";
 VAL_ 274 Battery_Status 5 "Normal";
 VAL_ 762 Target_CHG_Ph 0 "Standby" 1 "Initialisation" 2 "Subpoena" 3 "Energy_Transfer" 4 "Turn_Off" 15 "Reserved" 14 "Reserved" 0 "No Description";
+VAL_ 626 FC_Contactor_State 61 "Not_available" 62 "error" 63 "signal_invalid";
+VAL_ 626 ChargeFlap_Status 0 "closed" 1 "open" 2 "error" 3 "invalid";
 VAL_ 626 FC_Contactor_Test 0 "Fail" 1 "Pass";
+VAL_ 303 ST_KL 0 "No Description";
+VAL_ 1000 RQ_Diag 0 "No_Reset" 2 "Reset";
+VAL_ 764 lock_button 0 "no_op" 1 "unlock" 2 "lock" 3 "invalid";
