@@ -45,6 +45,7 @@ BO_ 751 LIMMsg2EF: 0 LIM
    SG_ MinV_Avail : 0|16@1+ (0.1,0) [0|1000] "Volts" Vector__XXX
    SG_ Min_I_Avail : 16|12@1+ (0.1,0) [0|410] "A" Vector__XXX
    SG_ Energy_Transmitted : 56|8@1+ (0.25,0) [0|63] "kWh" Vector__XXX
+   SG_ Power_Limit : 52|2@1+ (1,0) [0|2] "" Vector__XXX
 
 BO_ 690 LIMMsg2B2: 0 LIM
    SG_ Battery_Compatability : 38|2@1+ (1,0) [0|4] "" Vector__XXX
@@ -105,11 +106,11 @@ BO_ 753 UnknownMsg2F1: 0 Unknown
    SG_ CHG_I_Lim : 16|8@1+ (1,0) [0|254] "Amps" LIM
    SG_ CHG_V_Lim : 0|14@1- (0.1,0) [0|1000] "Volts" Vector__XXX
 
-BO_ 2147484721 UnknownMsg431: 0 Unknown
+BO_ 1073 UnknownMsg431: 0 Unknown
    SG_ Serv_Dis_Status : 0|2@1+ (1,0) [0|1] "" Vector__XXX
    SG_ Total_Battery : 40|12@1+ (0.02,0) [0|82] "kWh" Vector__XXX
 
-BO_ 2147484722 UnknownMsg432: 0 Unknown
+BO_ 1074 UnknownMsg432: 0 Unknown
    SG_ Voltage_Setpoint : 4|12@1+ (0.1,0) [0|410] "Volts" Vector__XXX
    SG_ Displayed_SOC : 32|8@1+ (0.5,0) [0|100] "%" Vector__XXX
    SG_ CV_Setpoint : 4|12@1+ (0.1,0) [0|409.4] "Volts" LIM
@@ -196,10 +197,10 @@ BA_ "GenMsgForegroundColor" BO_ 762 "#000000";
 BA_ "GenMsgBackgroundColor" BO_ 762 "#ffffff";
 BA_ "GenMsgForegroundColor" BO_ 753 "#000000";
 BA_ "GenMsgBackgroundColor" BO_ 753 "#ffffff";
-BA_ "GenMsgForegroundColor" BO_ 2147484721 "#000000";
-BA_ "GenMsgBackgroundColor" BO_ 2147484721 "#ffffff";
-BA_ "GenMsgForegroundColor" BO_ 2147484722 "#000000";
-BA_ "GenMsgBackgroundColor" BO_ 2147484722 "#ffffff";
+BA_ "GenMsgForegroundColor" BO_ 1073 "#000000";
+BA_ "GenMsgBackgroundColor" BO_ 1073 "#ffffff";
+BA_ "GenMsgForegroundColor" BO_ 1074 "#000000";
+BA_ "GenMsgBackgroundColor" BO_ 1074 "#ffffff";
 BA_ "GenMsgForegroundColor" BO_ 626 "#000000";
 BA_ "GenMsgBackgroundColor" BO_ 626 "#ffffff";
 BA_ "GenMsgForegroundColor" BO_ 808 "#000000";
@@ -221,6 +222,7 @@ BA_DEF_DEF_ "filterlabeling" 0;
 CM_ BU_ Unknown "Lim Command";
 VAL_ 670 Weld_Det_En 0 "Charger_does_not_support_the_EV" 1 "Charger_supports_the_EV_relay_weld" 3 "Signal_unavail";
 VAL_ 670 internal_charger_status 0 "Not_ready" 1 "Ready" 2 "Switch_off_charger" 3 "Interruption" 4 "Pre_charge" 5 "insulation_monitor" 6 "estop" 7 "Malfunction" 19 "reserved" 20 "reserved" 21 "signal_invalid";
+VAL_ 751 Power_Limit 0 "No" 1 "Yes" 3 "Invalid";
 VAL_ 690 Battery_Compatability 0 "Compatible" 1 "Incompatible" 3 "Signal_error";
 VAL_ 690 I_Limit 0 "No" 1 "Yes" 3 "Invalid";
 VAL_ 690 V_Limit 0 "No" 1 "Yes" 3 "Invalid";
