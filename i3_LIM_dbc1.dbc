@@ -39,6 +39,7 @@ BO_ 670 LIMMsg29E: 0 LIM
    SG_ Thresh_V : 40|16@1+ (0.1,0) [0|600] "V" Vector__XXX
    SG_ Weld_Det_En : 0|2@1+ (1,0) [0|4] "" Vector__XXX
    SG_ internal_charger_status : 2|4@1+ (1,0) [0|16] "" Vector__XXX
+   SG_ CCS_Protocol : 56|8@1+ (1,0) [0|255] "" Vector__XXX
 
 BO_ 751 LIMMsg2EF: 0 LIM
    SG_ MinV_Avail : 0|16@1+ (0.1,0) [0|1000] "Volts" Vector__XXX
@@ -49,6 +50,12 @@ BO_ 690 LIMMsg2B2: 0 LIM
    SG_ Battery_Compatability : 38|2@1+ (1,0) [0|4] "" Vector__XXX
    SG_ CHG_Volts : 0|16@1+ (0.1,0) [0|1] "Volts" Vector__XXX
    SG_ CHG_Amps : 16|16@1+ (0.1,0) [-500|500] "Amps" Vector__XXX
+   SG_ I_Limit : 44|2@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ V_Limit : 46|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Batt_Malf : 40|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Charge_Status : 32|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ CCS_Malf : 34|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DC_Chg_Stop : 42|2@1+ (1,0) [0|3] "" Vector__XXX
 
 BO_ 948 LIMMsg3B4: 0 LIM
    SG_ Pilot_Current : 0|8@1+ (1,0) [0|63] "Amps" Vector__XXX
@@ -98,11 +105,11 @@ BO_ 753 UnknownMsg2F1: 0 Unknown
    SG_ CHG_I_Lim : 16|8@1+ (1,0) [0|254] "Amps" LIM
    SG_ CHG_V_Lim : 0|14@1- (0.1,0) [0|1000] "Volts" Vector__XXX
 
-BO_ 1073 UnknownMsg431: 0 Unknown
+BO_ 2147484721 UnknownMsg431: 0 Unknown
    SG_ Serv_Dis_Status : 0|2@1+ (1,0) [0|1] "" Vector__XXX
    SG_ Total_Battery : 40|12@1+ (0.02,0) [0|82] "kWh" Vector__XXX
 
-BO_ 1074 UnknownMsg432: 0 Unknown
+BO_ 2147484722 UnknownMsg432: 0 Unknown
    SG_ Voltage_Setpoint : 4|12@1+ (0.1,0) [0|410] "Volts" Vector__XXX
    SG_ Displayed_SOC : 32|8@1+ (0.5,0) [0|100] "%" Vector__XXX
    SG_ CV_Setpoint : 4|12@1+ (0.1,0) [0|409.4] "Volts" LIM
@@ -189,10 +196,10 @@ BA_ "GenMsgForegroundColor" BO_ 762 "#000000";
 BA_ "GenMsgBackgroundColor" BO_ 762 "#ffffff";
 BA_ "GenMsgForegroundColor" BO_ 753 "#000000";
 BA_ "GenMsgBackgroundColor" BO_ 753 "#ffffff";
-BA_ "GenMsgForegroundColor" BO_ 1073 "#000000";
-BA_ "GenMsgBackgroundColor" BO_ 1073 "#ffffff";
-BA_ "GenMsgForegroundColor" BO_ 1074 "#000000";
-BA_ "GenMsgBackgroundColor" BO_ 1074 "#ffffff";
+BA_ "GenMsgForegroundColor" BO_ 2147484721 "#000000";
+BA_ "GenMsgBackgroundColor" BO_ 2147484721 "#ffffff";
+BA_ "GenMsgForegroundColor" BO_ 2147484722 "#000000";
+BA_ "GenMsgBackgroundColor" BO_ 2147484722 "#ffffff";
 BA_ "GenMsgForegroundColor" BO_ 626 "#000000";
 BA_ "GenMsgBackgroundColor" BO_ 626 "#ffffff";
 BA_ "GenMsgForegroundColor" BO_ 808 "#000000";
@@ -211,12 +218,16 @@ BA_DEF_DEF_ "GenMsgBackgroundColor" "#ffffff";
 BA_DEF_DEF_ "GenMsgForegroundColor" "#000000";
 BA_DEF_DEF_ "matchingcriteria" 0;
 BA_DEF_DEF_ "filterlabeling" 0;
-BA_DEF_DEF_ "matchingcriteria" 0;
-BA_DEF_DEF_ "filterlabeling" true;
 CM_ BU_ Unknown "Lim Command";
 VAL_ 670 Weld_Det_En 0 "Charger_does_not_support_the_EV" 1 "Charger_supports_the_EV_relay_weld" 3 "Signal_unavail";
 VAL_ 670 internal_charger_status 0 "Not_ready" 1 "Ready" 2 "Switch_off_charger" 3 "Interruption" 4 "Pre_charge" 5 "insulation_monitor" 6 "estop" 7 "Malfunction" 19 "reserved" 20 "reserved" 21 "signal_invalid";
 VAL_ 690 Battery_Compatability 0 "Compatible" 1 "Incompatible" 3 "Signal_error";
+VAL_ 690 I_Limit 0 "No" 1 "Yes" 3 "Invalid";
+VAL_ 690 V_Limit 0 "No" 1 "Yes" 3 "Invalid";
+VAL_ 690 Batt_Malf 0 "No" 1 "Yes" 3 "Invalid";
+VAL_ 690 Charge_Status 0 "Standby" 1 "Charging" 3 "Invalid";
+VAL_ 690 CCS_Malf 0 "Normal" 1 "Fail" 3 "Invalid";
+VAL_ 690 DC_Chg_Stop 0 "Tracking" 1 "Supression" 3 "Invalid";
 VAL_ 948 FC_Voltage 251 "AC_Charge" 254 "Error" 252 "Not_Available";
 VAL_ 948 Pilot_Status 0 "No_Pilot" 1 "AC_Not_Ready" 2 "AC_Ready" 3 "Error" 4 "5%_Not_Ready" 5 "5%_Ready" 6 "Pilot_Static";
 VAL_ 948 PP_Status 0 "Unplugged" 1 "Plug_Inserted";
