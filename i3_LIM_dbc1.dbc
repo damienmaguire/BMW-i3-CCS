@@ -40,6 +40,7 @@ BO_ 670 LIMMsg29E: 0 LIM
    SG_ Weld_Det_En : 0|2@1+ (1,0) [0|4] "" Vector__XXX
    SG_ internal_charger_status : 2|4@1+ (1,0) [0|16] "" Vector__XXX
    SG_ CCS_Protocol : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ Iso_Status : 6|2@1+ (1,0) [0|3] "" Vector__XXX
 
 BO_ 751 LIMMsg2EF: 0 LIM
    SG_ MinV_Avail : 0|16@1+ (0.1,0) [0|1000] "Volts" Vector__XXX
@@ -181,6 +182,8 @@ BA_DEF_ BO_ "matchingcriteria" INT 0 0;
 BA_DEF_ BO_ "filterlabeling" INT 0 0;
 BA_DEF_ BO_ "matchingcriteria" INT 0 0;
 BA_DEF_ BO_ "filterlabeling" INT 0 0;
+BA_DEF_ BO_ "matchingcriteria" INT 0 0;
+BA_DEF_ BO_ "filterlabeling" INT 0 0;
 BA_ "GenMsgBackgroundColor" BO_ 670 "#ffffff";
 BA_ "GenMsgForegroundColor" BO_ 670 "#000000";
 BA_ "GenMsgForegroundColor" BO_ 751 "#000000";
@@ -219,9 +222,12 @@ BA_DEF_DEF_ "GenMsgBackgroundColor" "#ffffff";
 BA_DEF_DEF_ "GenMsgForegroundColor" "#000000";
 BA_DEF_DEF_ "matchingcriteria" 0;
 BA_DEF_DEF_ "filterlabeling" 0;
+BA_DEF_DEF_ "matchingcriteria" 0;
+BA_DEF_DEF_ "filterlabeling" false;
 CM_ BU_ Unknown "Lim Command";
 VAL_ 670 Weld_Det_En 0 "Charger_does_not_support_the_EV" 1 "Charger_supports_the_EV_relay_weld" 3 "Signal_unavail";
 VAL_ 670 internal_charger_status 0 "Not_ready" 1 "Ready" 2 "Switch_off_charger" 3 "Interruption" 4 "Pre_charge" 5 "insulation_monitor" 6 "estop" 7 "Malfunction" 19 "reserved" 20 "reserved" 21 "signal_invalid";
+VAL_ 670 Iso_Status 0 "invalid" 1 "valid" 2 "error" 3 "invalid_signal";
 VAL_ 751 Power_Limit 0 "No" 1 "Yes" 3 "Invalid";
 VAL_ 690 Battery_Compatability 0 "Compatible" 1 "Incompatible" 3 "Signal_error";
 VAL_ 690 I_Limit 0 "No" 1 "Yes" 3 "Invalid";
