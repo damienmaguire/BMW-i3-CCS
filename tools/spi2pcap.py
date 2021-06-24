@@ -2,7 +2,7 @@
 #
 # spi2pcap - tool to convert Saleae Logic 1.2.x SPI decodes of a
 # Qualcomm Atheros QCA7000 HomePlug Green PHY into Ethernet frames in a PCAP
-# file suitable for opeingin in Wireshark or similar.
+# file suitable for opening in Wireshark or similar.
 #
 # Requirements:
 #  - Python3
@@ -89,9 +89,12 @@ class PacketProcessor:
         self._packet = self._packet + spidata
 
     def is_buffer_full(self) -> bool:
-        return self._expected_length == len(self._packet)
+        return len(self._packet) >= self._expected_length
 
     def write_packet(self) -> None:
+        # trim over-long packets
+        if (len(self._packet) > self._expected_length):
+            self._packet = self._packet[:self._expected_length]
         pkt = Ether(bytes(self._packet))
         print(self._prefix, pkt.summary())
         wrpcap(self._filename, pkt, append=True)
