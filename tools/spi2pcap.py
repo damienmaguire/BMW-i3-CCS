@@ -40,6 +40,7 @@ from scapy.all import wrpcap, Ether
 import csv
 from os import remove
 from os.path import exists
+import time
 
 parser = OptionParser()
 parser.add_option("-i", "--input", dest="input",
@@ -68,6 +69,7 @@ class PacketProcessor:
         self._packet = bytearray()
         self._expected_length = 0
         self._packet_count = 0
+        self._packet_time = None
         self._prefix = prefix
         self._filename = filename
         self.transition_to(WaitingState())
@@ -82,7 +84,8 @@ class PacketProcessor:
     def set_expected_length(self, length: int) -> None:
         self._expected_length = length
 
-    def start_packet(self, spidata: bytes) -> None:
+    def start_packet(self, packet_time: float, spidata: bytes) -> None:
+        self._packet_time = packet_time
         self._packet = bytearray(spidata)
 
     def append_packet(self, spidata: bytes) -> None:
@@ -96,16 +99,18 @@ class PacketProcessor:
         if (len(self._packet) > self._expected_length):
             self._packet = self._packet[:self._expected_length]
         pkt = Ether(bytes(self._packet))
+        pkt.time = self._packet_time
         print(self._prefix, pkt.summary())
         wrpcap(self._filename, pkt, append=True)
         self._packet_count += 1
+        self._packet_time = None
 
     @property
     def packet_count(self) -> int:
         return self._packet_count
 
-    def process(self, spidata):
-        self._state.process(spidata)
+    def process(self, packet_time: float, spidata: bytes):
+        self._state.process(packet_time, spidata)
 
 
 class State(ABC):
@@ -125,18 +130,18 @@ class State(ABC):
         self._processor = processor
 
     @abstractmethod
-    def process(self, spidata) -> None:
+    def process(self, packet_time: float, spidata: bytes) -> None:
         pass
 
 
 class WaitingState(State):
-    def process(self, spidata) -> None:
+    def process(self, packet_time: float, spidata: bytes) -> None:
         if (spidata == b'\xAA\xAA'):
             self.processor.transition_to(HeaderStartState())
 
 
 class HeaderStartState(State):
-    def process(self, spidata) -> None:
+    def process(self, packet_time: float, spidata: bytes) -> None:
         if (spidata == b'\xAA\xAA'):
             self.processor.transition_to(HeaderEndState())
         else:
@@ -145,14 +150,14 @@ class HeaderStartState(State):
 
 
 class HeaderEndState(State):
-    def process(self, spidata) -> None:
+    def process(self, packet_time: float, spidata: bytes) -> None:
         # Packet length has been byte swapped to little-endian
         self.processor.set_expected_length(unpack('<H', spidata)[0])
         self.processor.transition_to(LengthAState())
 
 
 class LengthAState(State):
-    def process(self, spidata) -> None:
+    def process(self, packet_time: float, spidata: bytes) -> None:
         if (spidata == b'\x00\x00'):
             self.processor.transition_to(LengthBState())
         else:
@@ -161,29 +166,18 @@ class LengthAState(State):
 
 
 class LengthBState(State):
-    def process(self, spidata) -> None:
-        self.processor.start_packet(spidata)
+    def process(self, packet_time: float, spidata: bytes) -> None:
+        self.processor.start_packet(packet_time, spidata)
         self.processor.transition_to(ReceivingFrameState())
 
 
 class ReceivingFrameState(State):
-    def process(self, spidata) -> None:
+    def process(self, packet_time: float, spidata: bytes) -> None:
         if (self.processor.is_buffer_full()):
             self.processor.write_packet()
             self.processor.transition_to(WaitingState())
         else:
             self.processor.append_packet(spidata)
-
-
-# State not used
-# TODO: Figure out how to better check the footer
-class FooterState(State):
-    def process(self, spidata) -> None:
-        if (spidata == b'\x55\x55'):
-            self.processor.write_packet()
-        else:
-            print('Bad packet footer received: ', spidata)
-        self.processor.transition_to(WaitingState())
 
 
 # Open a Saleae Logic 1.2.x exported SPI CSV file of the form:
@@ -200,15 +194,19 @@ with open(options.input, newline='') as spifile:
     if (exists(options.output)):
         remove(options.output)
 
+    # Use the current time as the base packet time. Relative timestamps come
+    # from the capture
+    start_time = time.time()
+
     receive = PacketProcessor("RX:", options.output)
     transmit = PacketProcessor("TX:", options.output)
 
     for row in reader:
-        packetTime = float(row[0])
+        packet_time = start_time + float(row[0])
         mosi = bytes.fromhex(row[2].removeprefix('0x'))
         miso = bytes.fromhex(row[3].removeprefix('0x'))
-        receive.process(miso)
-        transmit.process(mosi)
+        receive.process(packet_time, miso)
+        transmit.process(packet_time, mosi)
 
     print('TX packets: ', transmit.packet_count,
           ' RX packets: ', receive.packet_count)
