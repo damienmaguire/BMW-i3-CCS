@@ -182,10 +182,16 @@ if not options.output:
     exit()
 
 
+def remove_prefix(text, prefix):
+    if text.startswith(prefix):
+        return text[len(prefix):]
+    return text
+
+
 def ReadSaleaeLogic1XRow(row):
     packet_time = float(row[0])
-    mosi = bytes.fromhex(row[2].removeprefix('0x'))
-    miso = bytes.fromhex(row[3].removeprefix('0x'))
+    mosi = bytes.fromhex(remove_prefix(row[2], '0x'))
+    miso = bytes.fromhex(remove_prefix(row[3], '0x'))
     return (packet_time, mosi, miso)
 
 
@@ -193,8 +199,8 @@ def ReadSaleaeLogic2XRow(row):
     # Only process SPI result rows
     if row[0] == 'SPI' and row[1] == 'result':
         packet_time = float(row[2])
-        mosi = bytes.fromhex(row[4].removeprefix('0x'))
-        miso = bytes.fromhex(row[5].removeprefix('0x'))
+        mosi = bytes.fromhex(remove_prefix(row[4], '0x'))
+        miso = bytes.fromhex(remove_prefix(row[5], '0x'))
         return (packet_time, mosi, miso)
     else:
         return None
