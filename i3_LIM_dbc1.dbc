@@ -36,6 +36,9 @@ BS_:
 BU_: LIM BMS VCU
 
 
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ FC_Contactor_Test : 0|1@0+ (1,0) [0|1] "" Vector__XXX
+
 BO_ 670 LIMMsg29E: 8 LIM
  SG_ I_Available : 24|16@1+ (0.1,0) [-500|500] "Amps" Vector__XXX
  SG_ V_Avail : 8|16@1+ (0.1,0) [0|1000] "Volts" Vector__XXX
@@ -123,9 +126,9 @@ BO_ 1074 UnknownMsg432: 8 VCU
  SG_ Display_SOC : 32|8@1+ (0.5,0) [0|100] "%"  LIM
 
 BO_ 626 LIMMsg272: 8 LIM
- SG_ FC_Contactor_State : 18|6@1+ (1,0) [0|24] "" Vector__XXX
+ SG_ FC_Contactor_Info : 20|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ FC_Contactor_State : 18|2@1+ (1,0) [0|3] "" Vector__XXX
  SG_ ChargeFlap_Status : 16|2@1+ (1,0) [0|4] "" Vector__XXX
- SG_ FC_Contactor_Test : 19|1@0+ (1,0) [0|1] "" Vector__XXX
 
 BO_ 808 UnknownMsg328: 6 VCU
  SG_ Seconds_ctr : 0|32@1+ (1,0) [0|2704] "S"  LIM
@@ -150,6 +153,7 @@ BO_ 816 UnknownMsg330: 8 VCU
 
 
 CM_ BU_ VCU "Lim Command";
+CM_ BO_ 3221225472 "This is a message for not used signals, created by Vector CANdb++ DBC OLE DB Provider.";
 CM_ BO_ 670 "Only broadcasted during fastcharging - CCS charger specs ";
 CM_ BO_ 751 "- Min available voltage from the ccs charger";
 CM_ BO_ 690 "Only broadcasted during fastcharging - Voltage/current from charger";
@@ -166,6 +170,7 @@ CM_ BO_ 303 "100ms - Wake up message";
 CM_ BO_ 1000 "1000ms";
 CM_ BO_ 764 "100ms - Charge flap control";
 CM_ BO_ 816 "200ms - Range info";
+VAL_ 3221225472 FC_Contactor_Test 0 "Fail" 1 "Pass" ;
 VAL_ 670 Weld_Det_En 0 "Charger_does_not_support_the_EV" 1 "Charger_supports_the_EV_relay_weld" 3 "Signal_unavail" ;
 VAL_ 670 internal_charger_status 0 "Not_ready" 1 "Ready" 2 "Switch_off_charger" 3 "Interruption" 4 "Pre_charge" 5 "insulation_monitor" 6 "estop" 7 "Malfunction" 19 "reserved" 20 "reserved" 21 "signal_invalid" ;
 VAL_ 670 Iso_Status 0 "invalid" 1 "valid" 2 "error" 3 "invalid_signal" ;
@@ -194,9 +199,9 @@ VAL_ 1001 Chg_Status_Info 0 "No_charge" 1 "Init" 2 "Charge_active" 3 "Charge_pau
 VAL_ 1001 Chg_Readiness 0 "Not_Ready" 1 "Ready" 3 "Unavailable" ;
 VAL_ 1001 Charge_Req 0 "No_Charge" 1 "PlugCharge" 2 "Timer" ;
 VAL_ 762 Target_CHG_Ph 0 "Standby" 1 "Initialisation" 2 "Subpoena" 3 "Energy_Transfer" 4 "Turn_Off" 15 "Reserved" 14 "Reserved" 9 "Cable_Test" ;
-VAL_ 626 FC_Contactor_State 61 "Not_available" 62 "error" 63 "signal_invalid" ;
+VAL_ 626 FC_Contactor_Info 15 "Error" 7 "Weld Fault, Port Unenergized" 6 "Unexpected Voltage at Port" 5 "Second Contactor Welded" 4 "First Contactor Welded" 3 "Cont Weld cannot be carried out" 2 "Cont Weld test ongogin" 1 "Cont Weld test not carried out" 0 "DC Charge Port Okay" ;
+VAL_ 626 FC_Contactor_State 1 "DC Contactor Closed" 0 "DC Contactor Open" ;
 VAL_ 626 ChargeFlap_Status 0 "closed" 1 "open" 2 "error" 3 "invalid" ;
-VAL_ 626 FC_Contactor_Test 0 "Fail" 1 "Pass" ;
 VAL_ 303 ST_KL 0 "No Description" ;
 VAL_ 1000 RQ_Diag 0 "No_Reset" 2 "Reset" ;
 VAL_ 764 lock_button 0 "no_op" 1 "unlock" 2 "lock" 3 "invalid" ;
