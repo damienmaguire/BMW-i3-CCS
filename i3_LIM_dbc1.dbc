@@ -200,7 +200,7 @@ VAL_ 1001 Chg_Readiness 0 "Not_Ready" 1 "Ready" 3 "Unavailable" ;
 VAL_ 1001 Charge_Req 0 "No_Charge" 1 "PlugCharge" 2 "Timer" ;
 VAL_ 762 Target_CHG_Ph 0 "Standby" 1 "Initialisation" 2 "Subpoena" 3 "Energy_Transfer" 4 "Turn_Off" 15 "Reserved" 14 "Reserved" 9 "Cable_Test" ;
 VAL_ 626 FC_Contactor_Info 15 "Error" 7 "Weld Fault, Port Unenergized" 6 "Unexpected Voltage at Port" 5 "Second Contactor Welded" 4 "First Contactor Welded" 3 "Cont Weld cannot be carried out" 2 "Cont Weld test ongogin" 1 "Cont Weld test not carried out" 0 "DC Charge Port Okay" ;
-VAL_ 626 FC_Contactor_State 1 "DC Contactor Closed" 0 "DC Contactor Open" ;
+VAL_ 626 FC_Contactor_State 3 "Invalid Signal" 2 "Error" 1 "DC Contactor Closed" 0 "DC Contactor Open" ;
 VAL_ 626 ChargeFlap_Status 0 "closed" 1 "open" 2 "error" 3 "invalid" ;
 VAL_ 303 ST_KL 0 "No Description" ;
 VAL_ 1000 RQ_Diag 0 "No_Reset" 2 "Reset" ;
