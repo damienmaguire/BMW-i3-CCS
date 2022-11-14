@@ -38,6 +38,11 @@ BU_: LIM BMS VCU
 
 BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
  SG_ FC_Contactor_Test : 0|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ Displayed_SOC : 0|8@1+ (0.5,0) [0|100] "%" Vector__XXX
+ SG_ CV_Setpoint : 0|12@1+ (0.1,0) [0|409.4] "Volts" Vector__XXX
+
+BO_ 0 New_Message_18: 8 Vector__XXX
+ SG_ New_Signal_79 : 16|8@1+ (1,0) [0|0] "" Vector__XXX
 
 BO_ 670 LIMMsg29E: 8 LIM
  SG_ I_Available : 24|16@1+ (0.1,0) [-500|500] "Amps" Vector__XXX
@@ -70,7 +75,7 @@ BO_ 948 LIMMsg3B4: 8 LIM
  SG_ Cable_Current : 8|8@1+ (1,0) [0|63] "Amps" Vector__XXX
  SG_ FC_Voltage : 56|8@1+ (2,0) [0|500] "Volts" Vector__XXX
  SG_ Pilot_Status : 32|3@1+ (1,0) [0|1] "" Vector__XXX
- SG_ PP_Status : 16|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ PP_Status : 23|2@1+ (1,0) [0|1] "" Vector__XXX
  SG_ CP_Lock_Status : 26|2@1+ (1,0) [0|1] "" Vector__XXX
  SG_ CHG_Flap_Status : 24|2@1+ (1,0) [0|4] "" Vector__XXX
  SG_ Plug_Connection : 37|2@1+ (1,0) [0|4] "" Vector__XXX
@@ -117,10 +122,8 @@ BO_ 1073 UnknownMsg431: 7 VCU
  SG_ Serv_Dis_Status : 0|2@1+ (1,0) [0|1] "" Vector__XXX
  SG_ Total_Battery : 40|12@1+ (0.02,0) [0|82] "kWh" Vector__XXX
 
-BO_ 1074 UnknownMsg432: 8 VCU
- SG_ Voltage_Setpoint : 4|12@1+ (0.1,0) [0|410] "Volts" Vector__XXX
- SG_ Displayed_SOC : 32|8@1+ (0.5,0) [0|100] "%" Vector__XXX
- SG_ CV_Setpoint : 4|12@1+ (0.1,0) [0|409.4] "Volts"  LIM
+BO_ 1074 UnknownMsg432: 5 VCU
+ SG_ Voltage_Setpoint : 4|12@1+ (0.1,0) [0|410] "Volts"  LIM
  SG_ Low_SOC : 16|8@1+ (0.5,0) [0|100] "%"  LIM
  SG_ High_SOC : 24|8@1+ (0.5,0) [0|100] "%"  LIM
  SG_ Display_SOC : 32|8@1+ (0.5,0) [0|100] "%"  LIM
