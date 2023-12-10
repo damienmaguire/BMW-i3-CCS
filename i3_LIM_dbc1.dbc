@@ -33,15 +33,13 @@ NS_ :
 
 BS_:
 
-BU_: LIM BMS VCU
+BU_: LIM SME VCU
 
 
 BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
  SG_ FC_Contactor_Test : 0|1@0+ (1,0) [0|1] "" Vector__XXX
  SG_ Displayed_SOC : 0|8@1+ (0.5,0) [0|100] "%" Vector__XXX
  SG_ CV_Setpoint : 0|12@1+ (0.1,0) [0|409.4] "Volts" Vector__XXX
-
-BO_ 0 New_Message_18: 8 Vector__XXX
  SG_ New_Signal_79 : 16|8@1+ (1,0) [0|0] "" Vector__XXX
 
 BO_ 670 LIMMsg29E: 8 LIM
@@ -85,7 +83,7 @@ BO_ 948 LIMMsg3B4: 8 LIM
  SG_ Charging_Type : 48|8@1+ (1,0) [0|1] "" Vector__XXX
  SG_ DC_Chg_Volts : 39|9@1+ (2,0) [0|1000] "V" Vector__XXX
 
-BO_ 274 BMSMsg112: 8 BMS
+BO_ 274 BMSMsg112: 8 SME
  SG_ Battery_Volts : 16|16@1+ (0.1,0) [0|500] "Volts" Vector__XXX
  SG_ DC_link : 56|8@1+ (4,0) [0|1000] "Volts" Vector__XXX
  SG_ Battery_Status : 48|4@1+ (1,0) [0|16] "" Vector__XXX
@@ -118,11 +116,11 @@ BO_ 753 UnknownMsg2F1: 8 VCU
  SG_ CHG_I_Lim : 16|8@1+ (1,0) [0|254] "Amps"  LIM
  SG_ CHG_V_Lim : 0|14@1- (0.1,0) [0|1000] "Volts" Vector__XXX
 
-BO_ 1073 UnknownMsg431: 7 VCU
+BO_ 1073 BMSMsg431: 7 SME
  SG_ Serv_Dis_Status : 0|2@1+ (1,0) [0|1] "" Vector__XXX
  SG_ Total_Battery : 40|12@1+ (0.02,0) [0|82] "kWh" Vector__XXX
 
-BO_ 1074 UnknownMsg432: 5 VCU
+BO_ 1074 BMSMsg432: 5 SME
  SG_ Voltage_Setpoint : 4|12@1+ (0.1,0) [0|410] "Volts"  LIM
  SG_ Low_SOC : 16|8@1+ (0.5,0) [0|100] "%"  LIM
  SG_ High_SOC : 24|8@1+ (0.5,0) [0|100] "%"  LIM
@@ -153,13 +151,45 @@ BO_ 823 LIMMsg337: 2 LIM
 BO_ 816 UnknownMsg330: 8 VCU
  SG_ Odometer : 0|24@1+ (1,0) [0|16777200] "km" Vector__XXX
 
+BO_ 1072 BMSMsg430: 8 SME
+
+BO_ 506 BMSMsg1FA: 8 SME
+
+BO_ 1037 BMSMsg40D: 8 SME
+
+BO_ 767 BMSMsg2FF: 6 SME
+
+BO_ 569 BMSMsg239: 8 SME
+
+BO_ 701 BMSMsg2BD: 8 SME
+
+BO_ 757 BMSMsg2F5: 8 SME
+
+BO_ 962 BMSMsg3C2: 8 SME
+
+BO_ 1003 BMSMsg3EB: 8 SME
+
+BO_ 867 BMSMsg363: 8 SME
+
+BO_ 1287 BMSMsg507: 8 SME
+
+BO_ 1415 BMSMsg587: 8 SME
+
+BO_ 1052 BMSMsg41C: 2 SME
+ SG_ Frame0_41C : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Frame1_41C : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 1543 BMSMsg607: 8 SME
 
 
+
+CM_ BU_ SME "BMS";
 CM_ BU_ VCU "Lim Command";
 CM_ BO_ 3221225472 "This is a message for not used signals, created by Vector CANdb++ DBC OLE DB Provider.";
 CM_ BO_ 670 "Only broadcasted during fastcharging - CCS charger specs ";
 CM_ BO_ 751 "- Min available voltage from the ccs charger";
 CM_ BO_ 690 "Only broadcasted during fastcharging - Voltage/current from charger";
+CM_ BO_ 948 "200ms";
 CM_ BO_ 274 "10ms - BMS status";
 CM_ BO_ 1001 "200ms - Main LIM control
 ";
@@ -173,7 +203,22 @@ CM_ BO_ 303 "100ms - Wake up message";
 CM_ BO_ 1000 "1000ms";
 CM_ BO_ 764 "100ms - Charge flap control";
 CM_ BO_ 816 "200ms - Range info";
-VAL_ 3221225472 FC_Contactor_Test 0 "Fail" 1 "Pass" ;
+CM_ BO_ 1072 "Variable rate - Always brodcasted by 94Ah battery";
+CM_ BO_ 506 "1s - Always brodcasted by 94Ah battery";
+CM_ BO_ 1037 "1s - Always brodcasted by 94Ah battery";
+CM_ BO_ 767 "100ms - Always brodcasted by 94Ah battery";
+CM_ BO_ 569 "200ms - Always brodcasted by 94Ah battery";
+CM_ BO_ 701 "100ms - Always brodcasted by 94Ah battery";
+CM_ BO_ 757 "100ms - Always brodcasted by 94Ah battery";
+CM_ BO_ 962 "1s - Always brodcasted by 94Ah battery";
+CM_ BO_ 1003 "1s - Always brodcasted by 94Ah battery";
+CM_ BO_ 867 "1s - Always brodcasted by 94Ah battery";
+CM_ BO_ 1287 "Always brodcasted by 94Ah battery";
+CM_ BO_ 1415 "5s - Always brodcasted by 94Ah battery";
+CM_ BO_ 1052 "1s - Always brodcasted by 94Ah battery";
+CM_ SG_ 1052 Frame0_41C "Static 0xFF";
+CM_ SG_ 1052 Frame1_41C "Static 0xFC";
+CM_ BO_ 1543 "Always brodcasted by 94Ah battery";
 VAL_ 670 Weld_Det_En 0 "Charger_does_not_support_the_EV" 1 "Charger_supports_the_EV_relay_weld" 3 "Signal_unavail" ;
 VAL_ 670 internal_charger_status 0 "Not_ready" 1 "Ready" 2 "Switch_off_charger" 3 "Interruption" 4 "Pre_charge" 5 "insulation_monitor" 6 "estop" 7 "Malfunction" 19 "reserved" 20 "reserved" 21 "signal_invalid" ;
 VAL_ 670 Iso_Status 0 "invalid" 1 "valid" 2 "error" 3 "invalid_signal" ;
